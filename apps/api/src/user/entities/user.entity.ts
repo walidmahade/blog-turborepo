@@ -1,36 +1,30 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Post } from 'src/post/entities/post.entity';
 import { CommentEntity } from 'src/comment/entities/comment.entity';
 import { Like } from 'src/like/entities/like.entity';
-import { User } from 'src/user/entities/user.entity';
-import { Tag } from 'src/tag/entities/tag.entity';
+
 @ObjectType()
-export class Post {
+export class User {
   @Field(() => Int)
   id: number;
 
   @Field(() => String)
-  title: string;
+  name: string;
 
   @Field(() => String)
-  slug?: string;
+  email: string;
 
-  @Field(() => String)
-  content: string;
+  @Field(() => String, { nullable: true })
+  bio?: string;
 
-  @Field(() => String)
-  thumbnail?: string;
+  @Field(() => String, { nullable: true })
+  avatar?: string;
 
-  @Field(() => Boolean)
-  published: boolean;
-
-  @Field(() => User)
-  author: User;
+  @Field(() => [Post])
+  posts: Post[];
 
   @Field(() => [CommentEntity])
   comments: CommentEntity[];
-
-  @Field(() => [Tag])
-  tags: Tag[];
 
   @Field(() => [Like])
   likes: Like[];
