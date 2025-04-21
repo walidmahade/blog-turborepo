@@ -10,10 +10,7 @@ export class AuthResolver {
   @Mutation(() => User)
   async signIn(@Args('signInInput') signInInput: SignInInput) {
     const user = await this.authService.validateLocalUser(signInInput);
-
-    // const token = await this.authService.signToken(user.id);
-
-    return user;
+    return await this.authService.login(user);
   }
 
   // @Mutation(() => User)
