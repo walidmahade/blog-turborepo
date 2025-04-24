@@ -48,4 +48,21 @@ export class AuthService {
       accessToken,
     };
   }
+
+  async validateJwtUser(userId: number) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    return {
+      id: user.id,
+      name: user.name,
+      avatar: user.avatar,
+      email: user.email,
+    };
+  }
 }
