@@ -14,7 +14,7 @@ export class PostResolver {
   //   return this.postService.create(createPostInput);
   // }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Query(() => [Post], { name: 'posts' })
   findAll(@Context() context) {
     const user = context.req.user;
